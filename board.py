@@ -2,7 +2,7 @@
 Contains Logic for the Game Board
 """
 
-def boardParser(number: int) -> str:
+def board_parser(number: int) -> str:
     """
     Get the character associated with a number in the board config
     
@@ -20,131 +20,131 @@ def boardParser(number: int) -> str:
     else:
         return '?'
     
-def changeBoard(boardConfig: list[int], type: int, position: int) -> None:
+def change_board(board_config: list[int], type: int, position: int) -> None:
     """
     Edits the Board Config
 
-    :param boardConfig: current board config
-    :type boardConfig: list[int]
+    :param board_config: current board config
+    :type board_config: list[int]
     :param type: What you want to write to the board
     :type type: int
     :param position: Position on the board you want to change
     """
-    boardConfig[position] = type
+    board_config[position] = type
 
-def validConfig(boardConfig: list[int]) -> bool:
+def valid_config(board_config: list[int]) -> bool:
     """
     Check the validity of a board config based on:
     length and values
 
-    :param boardConfig: The board config to be validated
-    :type boardConfig: list[int]
+    :param board_config: The board config to be validated
+    :type board_config: list[int]
     :return: If valid or not
     :rtype: bool
     """
     #check for correct length
-    if(len(boardConfig) != 9):
+    if(len(board_config) != 9):
         print("Board Config does not have the correct length of 9.")
-        print(f"Given board length: {len(boardConfig)}")
+        print(f"Given board length: {len(board_config)}")
         return False
     #check for invalid numbers in config
-    for i in boardConfig:
-        if(boardConfig[i] < 0 and boardConfig[i] > 2):
+    for i in board_config:
+        if(board_config[i] < 0 and board_config[i] > 2):
             print("Board Contains invalid numbers")
             print("Valid numbers: 0 for empty; 1 for x; 2 for o")
-            print(f"Given number: {boardConfig[i]}")
+            print(f"Given number: {board_config[i]}")
             return False
     return True
 
-def winningCondition(boardConfig: list[int]) -> int:
+def winning_condition(board_config: list[int]) -> int:
     """
     Checks any board config to see whether or not a player has Won
     Returns 0 for no win condition, 1 for x won and 2 for o won
 
-    :param boardConfig: The board configuration to check
-    :type boardConfig: list[int]
+    :param board_config: The board configuration to check
+    :type board_config: list[int]
     :return: whether a player has won or not and which one
     :rtype: int
     """
-    if(validConfig(boardConfig) == False):
+    if(valid_config(board_config) == False):
         return 0
     #top row matches
-    if(boardConfig[0] == boardConfig[1] == boardConfig[2] != 0):
-        return boardConfig[0]
+    if(board_config[0] == board_config[1] == board_config[2] != 0):
+        return board_config[0]
     #middle row matches
-    if(boardConfig[3] == boardConfig[4] == boardConfig[5] != 0):
-        return boardConfig[3]
+    if(board_config[3] == board_config[4] == board_config[5] != 0):
+        return board_config[3]
     #bottom row matches
-    if(boardConfig[6] == boardConfig[7] == boardConfig[8] != 0):
-        return boardConfig[6]
+    if(board_config[6] == board_config[7] == board_config[8] != 0):
+        return board_config[6]
     #left column matches
-    if(boardConfig[0] == boardConfig[3] == boardConfig[6] != 0):
-        return boardConfig[0]
+    if(board_config[0] == board_config[3] == board_config[6] != 0):
+        return board_config[0]
     #middle column matches
-    if(boardConfig[1] == boardConfig[4] == boardConfig[7] != 0):
-        return boardConfig[1]
+    if(board_config[1] == board_config[4] == board_config[7] != 0):
+        return board_config[1]
     #right column matches
-    if(boardConfig[2] == boardConfig[5] == boardConfig[8] != 0):
-        return boardConfig[2]
+    if(board_config[2] == board_config[5] == board_config[8] != 0):
+        return board_config[2]
     #diagonal from top right matches
-    if(boardConfig[0] == boardConfig[4] == boardConfig[8] != 0):
-        return boardConfig[0]
+    if(board_config[0] == board_config[4] == board_config[8] != 0):
+        return board_config[0]
     #diagonal from top left matches
-    if(boardConfig[2] == boardConfig[4] == boardConfig[6] != 0):
-        return boardConfig[2]
+    if(board_config[2] == board_config[4] == board_config[6] != 0):
+        return board_config[2]
     return 0
 
 #Converts player input (1a, 3b, C2...) to position in boardconfig list
 #Returns -1 if input is invalid
-def inputToBoardPosition(playerInput: str) -> int:
+def input_to_board_position(player_input: str) -> int:
     """
     Converts player input (1a, 3b, C3, ...) to a position on the board
     Returns -1 if input is invalid
 
-    :param playerInput: Any input string
-    :type playerInput: str
+    :param player_input: Any input string
+    :type player_input: str
     :return: Position on the board
     :rtype: int
     """
     #Top Left
-    if(playerInput == "a1" or playerInput == "1a" or playerInput == "A1" or playerInput == "1A"):
+    if(player_input == "a1" or player_input == "1a" or player_input == "A1" or player_input == "1A"):
         return 0
     #Top Middle
-    if(playerInput == "b1" or playerInput == "1b" or playerInput == "B1" or playerInput == "1B"):
+    if(player_input == "b1" or player_input == "1b" or player_input == "B1" or player_input == "1B"):
         return 1
     #Top Right
-    if(playerInput == "c1" or playerInput == "1c" or playerInput == "C1" or playerInput == "1C"):
+    if(player_input == "c1" or player_input == "1c" or player_input == "C1" or player_input == "1C"):
         return 2
     #Middle Left
-    if(playerInput == "a2" or playerInput == "2a" or playerInput == "A2" or playerInput == "2A"):
+    if(player_input == "a2" or player_input == "2a" or player_input == "A2" or player_input == "2A"):
         return 3
     #Middle Middle
-    if(playerInput == "b2" or playerInput == "2b" or playerInput == "B2" or playerInput == "2B"):
+    if(player_input == "b2" or player_input == "2b" or player_input == "B2" or player_input == "2B"):
         return 4
     #Middle Right
-    if(playerInput == "c2" or playerInput == "2c" or playerInput == "C2" or playerInput == "2C"):
+    if(player_input == "c2" or player_input == "2c" or player_input == "C2" or player_input == "2C"):
         return 5
     #Bottom Left
-    if(playerInput == "a3" or playerInput == "3a" or playerInput == "A3" or playerInput == "3A"):
+    if(player_input == "a3" or player_input == "3a" or player_input == "A3" or player_input == "3A"):
         return 6
     #Bottom Middle
-    if(playerInput == "b3" or playerInput == "3b" or playerInput == "B3" or playerInput == "3B"):
+    if(player_input == "b3" or player_input == "3b" or player_input == "B3" or player_input == "3B"):
         return 7
     #Bottom Right
-    if(playerInput == "c3" or playerInput == "3c" or playerInput == "C3" or playerInput == "3C"):
+    if(player_input == "c3" or player_input == "3c" or player_input == "C3" or player_input == "3C"):
         return 8
     return -1
 
-def initialBoard() -> list[int]:
+def initial_board() -> list[int]:
     """
     Generate an empty board
 
     :return: empty board config
     :rtype: list[int]
     """
-    initialBoard: list[int] = [
+    initial_board: list[int] = [
         0, 0, 0,
         0, 0, 0,
         0, 0, 0
     ]
-    return initialBoard
+    return initial_board

@@ -1,26 +1,26 @@
 import board
-import consoleHandler
+import console_handler
 
-def runGame() -> None:
+def run_game() -> None:
     """
     Run the Game
     """
     #main program loop
-    programRunning: bool = True
-    while programRunning == True:
-        boardConfig: list[int] = board.initialBoard()
+    program_running: bool = True
+    while program_running == True:
+        board_config: list[int] = board.initial_board()
         player: int = 1
-        movesMade: int = 0
+        moves_made: int = 0
         #main game loop
-        gameRunning: bool = True
-        while gameRunning == True:
-            consoleHandler.startingMessage()
-            consoleHandler.printBoard(boardConfig)
+        game_running: bool = True
+        while game_running == True:
+            console_handler.starting_message()
+            console_handler.print_board(board_config)
 
             #Get user input and change board
-            inputPosition: int = consoleHandler.getPlayerInput(player, boardConfig)
-            board.changeBoard(boardConfig, player, inputPosition)
-            movesMade = movesMade + 1
+            input_position: int = console_handler.get_player_input(player, board_config)
+            board.change_board(board_config, player, input_position)
+            moves_made += 1
 
             #change whos turn it is
             if(player == 1):
@@ -28,15 +28,15 @@ def runGame() -> None:
             else:
                 player = 1
 
-            win: int = board.winningCondition(boardConfig)
+            win: int = board.winning_condition(board_config)
 
             if(win != 0):
                 #end game loop and check if to end program loop
-                gameRunning = False
-                programRunning = consoleHandler.playerWon(win)
-            elif(movesMade == 9):
+                game_running = False
+                program_running = console_handler.player_won(win)
+            elif(moves_made == 9):
                 #end game loop and check if to end program loop
-                gameRunning = False
-                programRunning = consoleHandler.gameOver()
+                game_running = False
+                program_running = console_handler.game_over()
 
-runGame()
+run_game()

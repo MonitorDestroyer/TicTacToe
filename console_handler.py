@@ -4,55 +4,55 @@ Handles Console In-/Output
 
 import board
 
-def printBoard(boardConfig: list[int]) -> None:
+def print_board(board_config: list[int]) -> None:
    """
    Print Board to the console, based on any configuration
 
-   :param boardConfig: the board configuration you want to be printed
-   :type boardConfig: list[int]
+   :param board_config: the board configuration you want to be printed
+   :type board_config: list[int]
    """
-   if(board.validConfig(boardConfig) == False):
+   if(board.valid_config(board_config) == False):
       print("Invalid board Configuration")
       return
    print("  a b c")
-   print(f"1|{board.boardParser(boardConfig[0])}|{board.boardParser(boardConfig[1])}|{board.boardParser(boardConfig[2])}|")
-   print(f"2|{board.boardParser(boardConfig[3])}|{board.boardParser(boardConfig[4])}|{board.boardParser(boardConfig[5])}|")
-   print(f"3|{board.boardParser(boardConfig[6])}|{board.boardParser(boardConfig[7])}|{board.boardParser(boardConfig[8])}|")
+   print(f"1|{board.board_parser(board_config[0])}|{board.board_parser(board_config[1])}|{board.board_parser(board_config[2])}|")
+   print(f"2|{board.board_parser(board_config[3])}|{board.board_parser(board_config[4])}|{board.board_parser(board_config[5])}|")
+   print(f"3|{board.board_parser(board_config[6])}|{board.board_parser(board_config[7])}|{board.board_parser(board_config[8])}|")
 
-def getPlayerInput(player: int, boardConfig: list[int]) -> int:
+def get_player_input(player: int, board_config: list[int]) -> int:
    """
    Get Player input validates it and returns position in boardconfig list
    Returns -1 on failure to assign
 
    :param player: The id of the player(1 for x and 2 for o)
    :type player: int
-   :param boardConfig: The current board config
-   :type boardConfig: list[int]
+   :param board_config: The current board config
+   :type board_config: list[int]
    :return: The position the player chose
    :rtype: int
    """
    incorrect: bool = True
-   playerCharacter: str = board.boardParser(player)
+   player_character: str = board.board_parser(player)
    #set default return to -1
-   inputConverted: int = -1
+   input_converted: int = -1
    while incorrect == True:
-      print(f"Player {playerCharacter.upper()}, please enter where you would like to add your {playerCharacter}.")
+      print(f"Player {player_character.upper()}, please enter where you would like to add your {player_character}.")
       print("(Format: 1a, b3, 2A, C2)")
       #get player input and convert it to board position
-      playerInput: str = input("Position: ")
-      inputConverted = board.inputToBoardPosition(playerInput)
+      player_input: str = input("Position: ")
+      input_converted = board.input_to_board_position(player_input)
       #check if player input is a valid position
-      if(inputConverted != -1):
+      if(input_converted != -1):
       #Check if the selected position is empty
-         if(boardConfig[inputConverted] == 0):
+         if(board_config[input_converted] == 0):
             incorrect = False
          else:
             print("The position you select must be empty")
       else:
          print("Invalid input, please try again.")
-   return inputConverted
+   return input_converted
 
-def startingMessage() -> None:
+def starting_message() -> None:
     """
     Print the welcome message
     """
@@ -60,7 +60,7 @@ def startingMessage() -> None:
     print("Welcome to the wonderful game of Tic Tac Toe")
     print("============================================")
 
-def playerWon(player: int) -> bool:
+def player_won(player: int) -> bool:
    """
    Win Message, also asks if players want to play again
 
@@ -69,16 +69,16 @@ def playerWon(player: int) -> bool:
    :return: Whether to play again or not
    :rtype: bool
    """
-   playerCharacter: str = board.boardParser(player)
-   print(f"Congratulations Player {playerCharacter.upper()}, you won!")
+   player_character: str = board.board_parser(player)
+   print(f"Congratulations Player {player_character.upper()}, you won!")
    print("If you would like a rematch, please enter 'again'")
-   againInput: str = input("Rematch?: ")
-   if(againInput == "again"):
+   again_input: str = input("Rematch?: ")
+   if(again_input == "again"):
       return True
    print("Goodbye")
    return False
 
-def gameOver() -> bool:
+def game_over() -> bool:
    """"
    Game over Message when no more moves are available
    also asks player whether to play again or not
@@ -88,8 +88,8 @@ def gameOver() -> bool:
    """
    print("It's a draw, there are no more possible moves to make")
    print("If you would like a rematch, please enter 'again'")
-   againInput: str = input("Rematch?: ")
-   if(againInput == "again"):
+   again_input: str = input("Rematch?: ")
+   if(again_input == "again"):
       return True
    print("Goodbye")
    return False
